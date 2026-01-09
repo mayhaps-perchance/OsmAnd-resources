@@ -114,7 +114,7 @@ function populateDictionary(tts) {
 	// 『国境 検問徐』と間に半角スペースを入れて『所』の代わりに『徐』という字にすると良い。
 	dictionary["border_control"] = tts ? "出入国管理があります" : "border_control.ogg"; //国境検問所の所をしょとN2TTSが読むため。半角スペースは国境をこっきょうと読ませるため。
 	dictionary["railroad_crossing"] = tts ? "踏切があります" : "railroad_crossing.ogg";
-	dictionary["traffic_calming"] = tts ? "減速隊があります" : "traffic_calming.ogg"; // Googleテキスト読み上げエンジンは減速帯を『げんそくおび』と読むので。
+	dictionary["traffic_calming"] = tts ? "減速帯があります" : "traffic_calming.ogg";
 	dictionary["toll_booth"] = tts ? "料金所があります" : "toll_booth.ogg"; // Googleは『りょうきんじょ』N2TTSは『りょうきんしょ』だが、どちらの読みも正しいので漢字表記に戻した。
 	dictionary["stop"] = tts ? "一時停止です" : "stop.ogg";
 	dictionary["pedestrian_crosswalk"] = tts ? "横断歩道があります" : "pedestrian_crosswalk.ogg";
@@ -234,7 +234,7 @@ function distance(dist) {
 			} else if (dist < 100) {
 				return (tts ? (Math.round(dist/10.0/0.9144)*10).toString() : ogg_dist(Math.round(dist/10.0/0.9144)*10)) + dictionary["yards"];
 			} else if (dist < 1300) {
-				return (tts ? (Math.round(2*dist/100.0/0.9144)*50).toString() : ogg_dist(Math.round(2*dist/100.0/0.9144)*50)) + dictionary["yards"]; 
+				return (tts ? (Math.round(2*dist/100.0/0.9144)*50).toString() : ogg_dist(Math.round(2*dist/100.0/0.9144)*50)) + dictionary["yards"];
 			} else if (dist < 2414) {
 				return dictionary["around_1_mile"];
 			} else if (dist < 16093) {
@@ -275,7 +275,7 @@ function hours(minutes) {
 		return dictionary["1_hour"];
 	} else {
 		var hours = Math.floor(minutes / 60);
-		return (tts ? hours.toString() : ogg_dist(hours)) + dictionary["hours"]; 
+		return (tts ? hours.toString() : ogg_dist(hours)) + dictionary["hours"];
 	}
 }
 
@@ -296,7 +296,7 @@ function follow_street(streetName) {
 		return "";
 	} else if (streetName["toStreetName"] == "" && streetName["toRef"] == "") {
 		return streetName["toDest"] + " " + dictionary["to"];
-	} else if (streetName["toRef"] == streetName["fromRef"] && streetName["toStreetName"] == streetName["fromStreetName"] || 
+	} else if (streetName["toRef"] == streetName["fromRef"] && streetName["toStreetName"] == streetName["fromStreetName"] ||
 			(streetName["toRef"] == streetName["fromRef"] && streetName["toStreetName"] == "")) {
 		return assemble_street_name(streetName) + dictionary["on"];
 	} else if (!(streetName["toRef"] == streetName["fromRef"] && streetName["toStreetName"] == streetName["fromStreetName"])) {
@@ -308,7 +308,7 @@ function turn(turnType, dist, streetName) {
 	if (dist == -1) {
 		return getTurnType(turnType) + (tts ? "。" : " ") + turn_street(streetName);
 	} else {
-		return distance(dist) + " " + dictionary["in"] + (tts ? "、" : " ") + getTurnType(turnType) + (tts ? "。" : " ") + turn_street(streetName); 
+		return distance(dist) + " " + dictionary["in"] + (tts ? "、" : " ") + getTurnType(turnType) + (tts ? "。" : " ") + turn_street(streetName);
 	}
 }
 
@@ -411,7 +411,7 @@ function turn_street(streetName) {
 	} else if (streetName["toRef"] == streetName["fromRef"] && streetName["toStreetName"] == streetName["fromStreetName"]) {
 		// 『fromRef(現在走行中の通り)とtoStreetName(直後に入る通り)』がtoRef(直後に入る道)とfromStreetName(今まで来た道)と変更がない場合streetNameに「on(上です)」を付与する。	} else if (streetName["toRef"] == streetName["fromRef"] && streetName["toStreetName"] == streetName["fromStreetName"]) {
 		return assemble_street_name(streetName) + dictionary["on"];
-	} else if ((streetName["toRef"] == streetName["fromRef"] && streetName["toStreetName"] == streetName["fromStreetName"]) 
+	} else if ((streetName["toRef"] == streetName["fromRef"] && streetName["toStreetName"] == streetName["fromStreetName"])
 		|| (streetName["toStreetName"] == "" && streetName["toRef"] == streetName["fromRef"])) {
 		// fromRef(前参照)とtoStreetName(直後に入る通り)が同じで尚且つ、toRef(後参照)とfromStreetName(今来た道)が同じ場合
 		// さらにtoStreetName(直後に入る通り)が空("")でなおかつtoRef(後参照)がfromRef(前参照)と同じ場合to「on(上です)」をstreetNameに付与する。
@@ -499,7 +499,7 @@ function prepare_turn(turnType, dist, streetName) {
 }
 
 function prepare_roundabout(dist, exit, streetName) {
-	return distance(dist) + " " + dictionary["after"] + (tts ? "、" : " ") + dictionary["prepare_roundabout"]; 
+	return distance(dist) + " " + dictionary["after"] + (tts ? "、" : " ") + dictionary["prepare_roundabout"];
 }
 
 function and_arrive_destination(dest) {
