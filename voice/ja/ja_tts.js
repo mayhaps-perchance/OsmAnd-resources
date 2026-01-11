@@ -337,13 +337,13 @@ function take_exit_name(streetName) {
 }
 
 function getExitNumber(exitString, exitInt) {
-	if (!tts && exitInt > 0 && exitInt < 18) {
-			return dictionary["exit"] + " " + nth(exitInt);
-	} else if (!tts) {
-	// 1～17番以外の数字または文字(上の条件に該当しない)で、かつoggの場合『そこから出口へ向かいます』とだけ発声。
-			return dictionary["gotoexit"];
+	if (tts) {
+		return dictionary.exit + " " + exitString + " " + dictionary.courteous + "。";
+	} else if (1 <= exitInt && exitInt <= 17) {
+		return dictionary.exit + " " + nth(exitInt);
 	} else {
-			return dictionary["exit"] + " " + exitString + " " + dictionary["courteous"] + (tts ? "。" : " ");
+		// 1～17番以外の数字または文字(上の条件に該当しない)で、かつoggの場合『そこから出口へ向かいます』とだけ発声。
+		return dictionary.gotoexit;
 	}
 }
 
