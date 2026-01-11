@@ -245,23 +245,15 @@ function distance(dist) {
 function time(seconds) {
 	// 読み上げ時単位が数字の直後に付いていれば『○○分』を『ふん』と『ぷん』を読み分けてくれるので+ " " +を『分』の発音の手前だけ抜く。
 	// 余計なところを抜くと、ogg版で数字を読み上げなくなるので注意。
-	var minutes = Math.round(seconds/60);
-	var oggMinutes = Math.round(((seconds/300) * 5));
-	if (seconds < 30) {
+	const minutes = Math.round(seconds / 60);
+	const minutes_past_hour = minutes % 60;
+	if (minutes == 0) {
 		return dictionary["less_a_minute"];
-	} else if (minutes % 60 == 0 && tts) {
-		return hours(minutes);
-	} else if (minutes % 60 == 1 && tts) {
-		return hours(minutes) + " " + dictionary["1_minute"];
-	} else if (tts) {
-		return hours(minutes) + " " + (minutes % 60) + dictionary["minutes"];
-	} else if (!tts && seconds < 300) {
-		return ogg_dist(minutes) + dictionary["minutes"];
-	} else if (!tts && oggMinutes % 60 > 0) {
-		return hours(oggMinutes) + " " + ogg_dist(oggMinutes % 60) + dictionary["minutes"];
-	} else if (!tts) {
-		return hours(oggMinutes);
 	}
+	return hours(minutes)
+		+ (minutes_past_hour > 0
+			? " " + (tts ? minutes_past_hour : ogg_dist(minutes_past_hour)) + dictionary["minutes"]
+			: "");
 }
 
 function hours(minutes) {
