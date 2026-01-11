@@ -184,26 +184,26 @@ function distance(dist) {
 			if (dist < 17 ) {
 				return (tts ? Math.round(dist).toString() : ogg_dist(Math.round(dist))) + dictionary["meters"];
 			} else if (dist < 100) {
-				return (tts ? (Math.round(dist/10.0)*10).toString() : ogg_dist(Math.round(dist/10.0)*10)) + dictionary["meters"];
+				return (tts ? (Math.round(dist/10)*10).toString() : ogg_dist(Math.round(dist/10)*10)) + dictionary["meters"];
 			} else if (dist < 1000) {
-				return (tts ? (Math.round(2*dist/100.0)*50).toString() : ogg_dist(Math.round(2*dist/100.0)*50)) + dictionary["meters"];
+				return (tts ? (Math.round(2*dist/100)*50).toString() : ogg_dist(Math.round(2*dist/100)*50)) + dictionary["meters"];
 			} else if (dist < 1500) {
 				return dictionary["around_1_kilometer"];
 			} else if (dist < 10000) {
-				return dictionary["around"] + " " + (tts ? Math.round(dist/1000.0).toString() : ogg_dist(Math.round(dist/1000.0))) + dictionary["kilometers"];
+				return dictionary["around"] + " " + (tts ? Math.round(dist/1000).toString() : ogg_dist(Math.round(dist/1000))) + dictionary["kilometers"];
 			} else {
-				return (tts ? Math.round(dist/1000.0).toString() : ogg_dist(Math.round(dist/1000.0))) + dictionary["kilometers"];
+				return (tts ? Math.round(dist/1000).toString() : ogg_dist(Math.round(dist/1000))) + dictionary["kilometers"];
 			}
 		case "mi-f":
 			if (dist < 91) {
-				return (tts ? (Math.round(2*dist/100.0/0.3048)*50).toString() : ogg_dist(Math.round(2*dist/100.0/0.3048)*50)) + dictionary["feet"];
+				return (tts ? (Math.round(2*dist/100/0.3048)*50).toString() : ogg_dist(Math.round(2*dist/100/0.3048)*50)) + dictionary["feet"];
 			} else if (dist < 320) {
-				return (tts ? (Math.round(dist/100.0/0.3048)*100).toString() : ogg_dist(Math.round(dist/100.0/0.3048)*100)) + dictionary["feet"];
+				return (tts ? (Math.round(dist/100/0.3048)*100).toString() : ogg_dist(Math.round(dist/100/0.3048)*100)) + dictionary["feet"];
 			} else if (dist < 1367) {
 	            // マイル呼称 英語版原文文法
-	            //return (tts ? Math.round(dist/161.0).toString() : ogg_dist(Math.round(dist/161.0))) + dictionary["tenths_of_a_mile"];
+	            //return (tts ? Math.round(dist/161).toString() : ogg_dist(Math.round(dist/161))) + dictionary["tenths_of_a_mile"];
 	            // 下は日本語版「十分の～マイル」例「十分の三マイル」
-				return dictionary["tenths_of_a_mile"] + " " + (tts ? Math.round(dist/161.0).toString() : ogg_dist(Math.round(dist/161.0))) + dictionary["miles"];
+				return dictionary["tenths_of_a_mile"] + " " + (tts ? Math.round(dist/161).toString() : ogg_dist(Math.round(dist/161))) + dictionary["miles"];
 			} else if (dist < 2414) {
 				return dictionary["around_1_mile"];
 			} else if (dist < 16093) {
@@ -215,9 +215,9 @@ function distance(dist) {
 			if (dist < 17) {
 				return (tts ? Math.round(dist).toString() : ogg_dist(Math.round(dist))) + dictionary["meters"];
 			} else if (dist < 100) {
-				return (tts ? (Math.round(dist/10.0)*10).toString() : ogg_dist(Math.round(dist/10.0)*10)) + dictionary["meters"];
+				return (tts ? (Math.round(dist/10)*10).toString() : ogg_dist(Math.round(dist/10)*10)) + dictionary["meters"];
 			} else if (dist < 1300) {
-				return (tts ? (Math.round(2*dist/100.0)*50).toString() : ogg_dist(Math.round(2*dist/100.0)*50)) + dictionary["meters"];
+				return (tts ? (Math.round(2*dist/100)*50).toString() : ogg_dist(Math.round(2*dist/100)*50)) + dictionary["meters"];
 			} else if (dist < 2414) {
 				return dictionary["around_1_mile"];
 			} else if (dist < 16093) {
@@ -229,9 +229,9 @@ function distance(dist) {
 			if (dist < 17) {
 				return (tts ? Math.round(dist/0.9144).toString() : ogg_dist(Math.round(dist/0.9144))) + dictionary["yards"];
 			} else if (dist < 100) {
-				return (tts ? (Math.round(dist/10.0/0.9144)*10).toString() : ogg_dist(Math.round(dist/10.0/0.9144)*10)) + dictionary["yards"];
+				return (tts ? (Math.round(dist/10/0.9144)*10).toString() : ogg_dist(Math.round(dist/10/0.9144)*10)) + dictionary["yards"];
 			} else if (dist < 1300) {
-				return (tts ? (Math.round(2*dist/100.0/0.9144)*50).toString() : ogg_dist(Math.round(2*dist/100.0/0.9144)*50)) + dictionary["yards"];
+				return (tts ? (Math.round(2*dist/100/0.9144)*50).toString() : ogg_dist(Math.round(2*dist/100/0.9144)*50)) + dictionary["yards"];
 			} else if (dist < 2414) {
 				return dictionary["around_1_mile"];
 			} else if (dist < 16093) {
@@ -245,8 +245,8 @@ function distance(dist) {
 function time(seconds) {
 	// 読み上げ時単位が数字の直後に付いていれば『○○分』を『ふん』と『ぷん』を読み分けてくれるので+ " " +を『分』の発音の手前だけ抜く。
 	// 余計なところを抜くと、ogg版で数字を読み上げなくなるので注意。
-	var minutes = Math.round(seconds/60.0);
-	var oggMinutes = Math.round(((seconds/300.0) * 5));
+	var minutes = Math.round(seconds/60);
+	var oggMinutes = Math.round(((seconds/300) * 5));
 	if (seconds < 30) {
 		return dictionary["less_a_minute"];
 	} else if (minutes % 60 == 0 && tts) {
