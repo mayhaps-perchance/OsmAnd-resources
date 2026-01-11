@@ -540,7 +540,6 @@ function make_ut_wp() {
 
 // TRAFFIC WARNINGS
 function speed_alarm(maxSpeed, speed) {
-	if (tts) {
 // 日本語だと速度の後に単位が無いと変なので『丁寧語のですを付けて誤魔化す』or『単位をつける』の二択を選択可能。
 // 実質後者一択だが、折角作ったので英語＆標準準拠のヤツも入れておく
 // 「制限速度は50です」
@@ -548,24 +547,21 @@ function speed_alarm(maxSpeed, speed) {
 // ここまでが丁寧語
 // 以下はOsmAndの設定で速度単位を『キロメートル毎時』あるいは『その他(マイル毎時)』に設定した場合で分岐する処理
 // 「制限速度は50キロ(orマイル)です」
-		switch (metricConst) {
-			case "km-m":
-				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["kmh"];
-			case "mi-f":
-				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["mph"];
-			case "mi-m":
-				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["mph"];
-			case "mi-y":
-				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["mph"];
-			case "nm-m":
-				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["kmh"];
-			case "nm-f":
-				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["mph"];
-		}
-// ここまでが単位付き
-	} else {
-			return dictionary["exceed_limit"];
+	let maxSpeedUnit;
+	switch (metricConst) {
+		case "km-m":
+		case "nm-m":
+			maxSpeedUnit = dictionary["kmh"];
+			break;
+		case "mi-f":
+		case "mi-m":
+		case "mi-y":
+		case "nm-f":
+			maxSpeedUnit = dictionary["mph"];
+			break;
 	}
+	return dictionary["exceed_limit"] + (tts ? "、" + maxSpeed + maxSpeedUnit : "");
+// ここまでが単位付き
 }
 
 function attention(type) {
