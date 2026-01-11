@@ -30,6 +30,23 @@ var tts;
 
 //// STRINGS
 ////////////////////////////////////////////////////////////////
+function _generate_dictionary_exit(n) {
+	if (tts) {
+		return n + dictionary.nth;
+	} else {
+		switch (n) {
+			case 1:
+				return "1st.ogg";
+			case 2:
+				return "2nd.ogg";
+			case 3:
+				return "3rd.ogg";
+			default:
+				return n + "th.ogg";
+		}
+	}
+}
+
 function populateDictionary(tts) {
 	// ROUTE CALCULATED
 	// TTSエンジンなら『、』または『。』で適切なウエイトが入れられるが、体感では種類で長さは変わらない様な気がする。
@@ -67,23 +84,11 @@ function populateDictionary(tts) {
 	dictionary["take"] = tts ? "選択してください" : "take.ogg";
 	dictionary["exit"] = tts ? "出口は" : "exit.ogg";
 
-	dictionary["1st"] = tts ? "1番目です" : "1st.ogg";
-	dictionary["2nd"] = tts ? "2番目です" : "2nd.ogg";
-	dictionary["3rd"] = tts ? "3番目です" : "3rd.ogg";
-	dictionary["4th"] = tts ? "4番目です" : "4th.ogg";
-	dictionary["5th"] = tts ? "5番目です" : "5th.ogg";
-	dictionary["6th"] = tts ? "6番目です" : "6th.ogg";
-	dictionary["7th"] = tts ? "7番目です" : "7th.ogg";
-	dictionary["8th"] = tts ? "8番目です" : "8th.ogg";
-	dictionary["9th"] = tts ? "9番目です" : "9th.ogg";
-	dictionary["10th"] = tts ? "10番目です" : "10th.ogg";
-	dictionary["11th"] = tts ? "11番目です" : "11th.ogg";
-	dictionary["12th"] = tts ? "12番目です" : "12th.ogg";
-	dictionary["13th"] = tts ? "13番目です" : "13th.ogg";
-	dictionary["14th"] = tts ? "14番目です" : "14th.ogg";
-	dictionary["15th"] = tts ? "15番目です" : "15th.ogg";
-	dictionary["16th"] = tts ? "16番目です" : "16th.ogg";
-	dictionary["17th"] = tts ? "17番目です" : "17th.ogg";
+	dictionary.nth = "番目です";
+	for (let i = 1; i <= 17; i++) {
+		// number i coerced into string (e.g., when i = 1, dictionary["1"] is set)
+		dictionary[i] = _generate_dictionary_exit(i);
+	}
 
 	// STRAIGHT/FOLLOW
 	dictionary["go_ahead"] = tts ? "まっすぐ進んで下さい" : "go_ahead.ogg";
@@ -411,42 +416,7 @@ function assemble_street_name(streetName) {
 }
 
 function nth(exit) {
-	switch (exit) {
-		case (1):
-			return dictionary["1st"];
-		case (2):
-			return dictionary["2nd"];
-		case (3):
-			return dictionary["3rd"];
-		case (4):
-			return dictionary["4th"];
-		case (5):
-			return dictionary["5th"];
-		case (6):
-			return dictionary["6th"];
-		case (7):
-			return dictionary["7th"];
-		case (8):
-			return dictionary["8th"];
-		case (9):
-			return dictionary["9th"];
-		case (10):
-			return dictionary["10th"];
-		case (11):
-			return dictionary["11th"];
-		case (12):
-			return dictionary["12th"];
-		case (13):
-			return dictionary["13th"];
-		case (14):
-			return dictionary["14th"];
-		case (15):
-			return dictionary["15th"];
-		case (16):
-			return dictionary["16th"];
-		case (17):
-			return dictionary["17th"];
-	}
+	return dictionary[exit];
 }
 
 function make_ut(dist, streetName) {
