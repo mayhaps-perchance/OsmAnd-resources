@@ -257,14 +257,10 @@ function time(seconds) {
 }
 
 function hours(minutes) {
-	if (minutes < 60) {
-		return "";
-	} else if (minutes < 120) {
-		return dictionary["1_hour"];
-	} else {
-		var hours = Math.floor(minutes / 60);
-		return (tts ? hours.toString() : ogg_dist(hours)) + dictionary["hours"];
-	}
+	const hours = Math.floor(minutes / 60);
+	return hours > 0
+		? (tts ? hours : ogg_dist(hours)) + dictionary["hours"]
+		: "";
 }
 
 function route_recalc(dist, seconds) {
