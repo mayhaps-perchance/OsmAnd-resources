@@ -194,7 +194,6 @@ function distance(dist) {
 			} else {
 				return (tts ? Math.round(dist/1000.0).toString() : ogg_dist(Math.round(dist/1000.0))) + dictionary["kilometers"];
 			}
-			break;
 		case "mi-f":
 			if (dist < 91) {
 				return (tts ? (Math.round(2*dist/100.0/0.3048)*50).toString() : ogg_dist(Math.round(2*dist/100.0/0.3048)*50)) + dictionary["feet"];
@@ -212,7 +211,6 @@ function distance(dist) {
 			} else {
 				return (tts ? Math.round(dist/1609.3).toString() : ogg_dist(Math.round(dist/1609.3))) + dictionary["miles"];
 			}
-			break;
 		case "mi-m":
 			if (dist < 17) {
 				return (tts ? Math.round(dist).toString() : ogg_dist(Math.round(dist))) + dictionary["meters"];
@@ -227,7 +225,6 @@ function distance(dist) {
 			} else {
 				return (tts ? Math.round(dist/1609.3).toString() : ogg_dist(Math.round(dist/1609.3))) + dictionary["miles"];
 			}
-			break;
 		case "mi-y":
 			if (dist < 17) {
 				return (tts ? Math.round(dist/0.9144).toString() : ogg_dist(Math.round(dist/0.9144))) + dictionary["yards"];
@@ -242,7 +239,6 @@ function distance(dist) {
 			} else {
 				return (tts ? Math.round(dist/1609.3).toString() : ogg_dist(Math.round(dist/1609.3))) + dictionary["miles"];
 			}
-			break;
 	}
 }
 
@@ -362,28 +358,20 @@ function getTurnType(turnType) {
 	switch (turnType) {
 		case "left":
 			return dictionary["left"];
-			break;
 		case "left_sh":
 			return dictionary["left_sh"];
-			break;
 		case "left_sl":
 			return dictionary["left_sl"];
-			break;
 		case "right":
 			return dictionary["right"];
-			break;
 		case "right_sh":
 			return dictionary["right_sh"];
-			break;
 		case "right_sl":
 			return dictionary["right_sl"];
-			break;
 		case "left_keep":
 			return dictionary["left_keep"];
-			break;
 		case "right_keep":
 			return dictionary["right_keep"];
-			break;
 	}
 }
 
@@ -575,22 +563,16 @@ function speed_alarm(maxSpeed, speed) {
 		switch (metricConst) {
 			case "km-m":
 				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["kmh"];
-				break;
 			case "mi-f":
 				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["mph"];
-				break;
 			case "mi-m":
 				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["mph"];
-				break;
 			case "mi-y":
 				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["mph"];
-				break;
 			case "nm-m":
 				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["kmh"];
-				break;
 			case "nm-f":
 				return dictionary["exceed_limit"] + (tts ? "、" : " ") + maxSpeed.toString() + dictionary["mph"];
-				break;
 		}
 // ここまでが単位付き
 	} else {
@@ -606,37 +588,26 @@ function getAttentionString(type) {
 	switch (type) {
 		case "SPEED_CAMERA":
 			return dictionary["speed_camera"];
-			break;
 		case "SPEED_LIMIT":
 			return "";
-			break
 		case "BORDER_CONTROL":
 			return dictionary["border_control"];
-			break;
 		case "RAILWAY":
 			return dictionary["railroad_crossing"];
-			break;
 		case "TRAFFIC_CALMING":
 			return dictionary["traffic_calming"];
-			break;
 		case "TOLL_BOOTH":
 			return dictionary["toll_booth"];
-			break;
 		case "STOP":
 			return dictionary["stop"];
-			break;
 		case "PEDESTRIAN":
 			return dictionary["pedestrian_crosswalk"];
-			break;
 		case "MAXIMUM":
 			return "";
-			break;
 		case "TUNNEL":
 			return dictionary["tunnel"];
-			break;
 		default:
 			return "";
-			break;
 	}
 }
 
